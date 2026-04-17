@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
+:root {
+  /* Color Palette - Indigo & White Focus */
+  --primary: #3F51B5;
+  --primary-dark: #1A237E; /* Very dark indigo background */
+  --primary-light: #C5CAE9;
+  --secondary: #FFFFFF;
+  --text-main: #FFFFFF;
+  --text-accent: #9FA8DA;
+  --bg-color: #0d0f25; /* Very deep indigo solid background */
+  
+  /* Glassmorphism Variables */
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --glass-blur: blur(12px);
+  --transition-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --radius-squircle: 20px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #090514; /* Deep, near-black space violet base */
+  background-image: 
+    radial-gradient(circle at 20% 0%, rgba(91, 33, 182, 0.25) 0%, transparent 50%),   /* Top-left deep violet aura */
+    radial-gradient(circle at 80% 60%, rgba(219, 39, 119, 0.12) 0%, transparent 45%),  /* Bottom-right subtle pink/magenta hue */
+    radial-gradient(circle at 50% 100%, rgba(67, 56, 202, 0.15) 0%, transparent 60%);  /* Bottom-center indigo glow */
+  background-attachment: fixed;
+  color: var(--text-main);
+  line-height: 1.6;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: inherit; border: none; outline: none; cursor: pointer; }
+
+/* Fluid Grid System */
+.container {
+  width: 100%; padding-right: 1.5rem; padding-left: 1.5rem; margin: 0 auto;
+}
+@media (min-width: 640px) { .container { max-width: 640px; padding: 0 2rem; } }
+@media (min-width: 768px) { .container { max-width: 768px; } }
+@media (min-width: 1024px) { .container { max-width: 1024px; padding: 0 4rem; } }
+@media (min-width: 1280px) { .container { max-width: 1280px; } }
+
+.grid { display: grid; gap: 1.5rem; }
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 { font-weight: 700; color: var(--text-main); line-height: 1.2; }
+p { color: var(--text-accent); }
+
+/* Glassmorphic Utilities (Modular & Clean) */
+.glass-card, .card {
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-squircle);
+  box-shadow: var(--glass-shadow);
+  padding: 2rem;
+  border: 1px solid var(--glass-border);
+  position: relative;
+  transition: transform 400ms var(--transition-spring), box-shadow 400ms var(--transition-spring), border 400ms ease;
+  will-change: transform;
+}
+
+.card:hover, .glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Base Form elements */
+input, select {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  outline: none;
+}
+input::placeholder { color: rgba(255, 255, 255, 0.4); }
+input:focus, select:focus {
+  border-color: var(--primary);
+}
+
+/* Button UI */
+.btn-primary {
+  background-color: var(--secondary);
+  color: var(--bg-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--secondary);
+  border: 1px solid var(--secondary);
+  padding: 0.75rem 1.5rem;
+  border-radius: 99px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-outline:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: scale(1.02);
+}
+
+/* Page Layout Wrappers */
+.page-wrapper { min-height: 100vh; display: flex; flex-direction: column; position: relative; }
+.main-content { flex: 1; padding: 2rem 0; z-index: 1; }
+
+/* Bold Impact Typography Style (From user ref image) */
+.impact-heading {
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 12vw, 10rem);
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  margin: 0;
+  color: var(--secondary);
+  text-align: center;
+}
+
+.impact-heading-sub {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(1rem, 3vw, 2rem);
+  letter-spacing: 0.2em;
+  color: var(--primary);
+  margin-bottom: -1vw;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* Skeleton Loading */
+.skeleton {
+  background: rgba(255, 255, 255, 0.05);
+  animation: pulse 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
